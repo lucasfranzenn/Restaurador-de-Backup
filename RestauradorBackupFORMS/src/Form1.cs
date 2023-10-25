@@ -44,13 +44,13 @@ namespace RestauradorBackupFORMS
             InitializeComponent();
         }
 
-        private void showDatabase()
+        private bool showDatabase() 
         {
 
             if (text_nomeBanco.Text == "")
             {
                 MessageBox.Show("Por favor, insira algum nome de banco!", "Erro!");
-                return;
+                return false;
             }
 
             nomeBanco = text_nomeBanco.Text;
@@ -65,7 +65,7 @@ namespace RestauradorBackupFORMS
             if (reader.HasRows)
             {
                 StringBuilder bancosEncontrados = new StringBuilder();
-                bancosEncontrados.AppendLine("Banco não pode ser criado pois já existe!");
+                bancosEncontrados.AppendLine("BANCOS EXISTENTES: ");
 
                 reader.Close();
                 procuraBanco = $"SHOW DATABASES LIKE '{nomeBanco}%'";
@@ -80,17 +80,17 @@ namespace RestauradorBackupFORMS
                 reader.Close();
 
                 string mensagem = bancosEncontrados.ToString();
-                MessageBox.Show(mensagem, "BANCOS EXISTENTES");
+                MessageBox.Show(mensagem, "Banco não pode ser criado pois já existe!");
 
                 con.Close();
-                return;
+                return false ;
 
             }
             else
             {
 
                 con.Close();
-                return;
+                return true;
             }
             
         }
@@ -114,17 +114,21 @@ namespace RestauradorBackupFORMS
                     lbl_statusCon.Text = $"CONECTADO {host} {port}";
                     lbl_statusCon.ForeColor = Color.Green;
                     gb_backup.Visible = true;
+                    lbl_credit.Visible = true;
+                    linkLabel1.Visible = true;
                 }
                 else
                 {
                     lbl_statusCon.Text = "FALHA NA CONEXÃO";
                     lbl_statusCon.ForeColor = Color.Red;
                     gb_backup.Visible = false;
+                    lbl_credit.Visible = false;
+                    linkLabel1.Visible = false;
                 }
 
                 Con.Close();
 
-                lbl_credit.Visible = true;
+                
             }
         }
 
@@ -140,32 +144,6 @@ namespace RestauradorBackupFORMS
             conectaDB();
         }
 
-        private void bttn_validate_Click(object sender, EventArgs e)
-        {
-            showDatabase();
-        }
-
-        private void btnn_validadeBackup_Click(object sender, EventArgs e)
-        {
-            if (text_nomeBackup.Text == "")
-            {
-                MessageBox.Show("Insira algum nome de backup!", "Aviso!");
-                return;
-            }
-
-            nomeBackup = text_nomeBackup.Text;
-
-            //procuraArquivo();
-
-            DialogResult result = MessageBox.Show("Deseja apagar as linhas CREATE e USE?\nOBS: Recomendável que sim", "Pergunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-
-            if (result == DialogResult.Yes)
-            {
-                deleteCREATEUSE(nomeBackup);
-            }
-
-        }
 
         private void deleteCREATEUSE(string caminhoCompleto)
         {
@@ -296,7 +274,7 @@ namespace RestauradorBackupFORMS
 
         private void restaurarBanco()
         {
-            string restore_backup = $"mysql -h {host} -u {user} -p{pwd} -P {port} {nomeBanco} < {nomeBackup}";
+            string restore_backup = $"mysql -h {host} -u {user} -p{pwd} -P {port} {nomeBanco} < \"{nomeBackup}\"";
 
             ProcessStartInfo psi = new ProcessStartInfo("cmd.exe")
             {
@@ -394,38 +372,6 @@ namespace RestauradorBackupFORMS
             }
         }
 
-        private void bttn_atualizDB_Click(object sender, EventArgs e)
-        {
-
-
-            if (text_nomeBanco.Text == "")
-            {
-                MessageBox.Show("Por favor, insira algum nome de banco!", "Erro!");
-                return;
-            }
-
-            con.Open();
-            nomeBanco = text_nomeBanco.Text;
-            string procuraBanco = $"SHOW DATABASES LIKE '{nomeBanco}'";
-
-            MySqlCommand cmd = new MySqlCommand(procuraBanco, con);
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                atualizaDB();
-            }
-            else
-            {
-                MessageBox.Show("Banco não foi encontrado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            con.Close();
-
-
-
-        }
-
         private void text_nomeBanco_Leave(object sender, EventArgs e)
         {
             nomeBanco = text_nomeBanco.Text;
@@ -433,6 +379,12 @@ namespace RestauradorBackupFORMS
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            if (!cb_createDb.Checked && !cb_excluir.Checked && !cb_restauraBackup.Checked &&
+                !cb_atualizadb.Checked && !cb_pwd1.Checked && !cb_pwdsupervisor.Checked)
+            {
+                MessageBox.Show("Por favor, selecione alguma opção", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (cb_createDb.Checked)
             {
@@ -441,8 +393,16 @@ namespace RestauradorBackupFORMS
                     MessageBox.Show("Por favor, insira algum nome de banco!", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                if (showDatabase() == true)
+                {
+                    createDatabase();
 
-                createDatabase();
+                }
+                else
+                {
+                    return;
+                }
+
             }
 
             if (cb_excluir.Checked)
@@ -482,17 +442,17 @@ namespace RestauradorBackupFORMS
                 MySqlDataReader reader = cmd.ExecuteReader();
                 
 
-                if (reader.HasRows)
-                {
-                    nomeBackup = text_nomeBackup.Text;
-                    restaurarBanco();
-                }
-                else
+                if (!reader.HasRows)
                 {
                     MessageBox.Show("Banco não foi encontrado!", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    con.Close();
+                    return;
                 }
 
                 con.Close();
+                nomeBackup = text_nomeBackup.Text;
+                encondeutf8();
+                restaurarBanco();
             }
 
             if (cb_atualizadb.Checked)
@@ -531,19 +491,25 @@ namespace RestauradorBackupFORMS
                 }
 
                 con.Open();
-                string useBanco = $"use {nomeBanco}";
+                string useBanco = $"use `{nomeBanco}`";
                 string updatePWD = $"UPDATE usuarios SET PASSWORD = 'W'";
 
-                MySqlCommand cmd = new MySqlCommand(useBanco, con);
-                cmd.ExecuteNonQuery();
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand(useBanco, con);
+                    cmd.ExecuteNonQuery();
 
-                cmd = new MySqlCommand(updatePWD, con);
-                cmd.ExecuteNonQuery();
+                    cmd = new MySqlCommand(updatePWD, con);
+                    cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Todas as senhas foram atualizadas para 1", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Todas as senhas foram atualizadas para 1", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                finally
+                {
+                    con.Close();
+                }
 
 
-                con.Close();
 
             }
 
@@ -556,27 +522,35 @@ namespace RestauradorBackupFORMS
                 }
 
                 con.Open();
-                string useBanco = $"use {nomeBanco}";
+                string useBanco = $"use `{nomeBanco}`";
                 string updatePWD = $"UPDATE usuarios_supervisores SET Password = '4'";
 
-                MySqlCommand cmd = new MySqlCommand(useBanco, con);
-                cmd.ExecuteNonQuery();
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand(useBanco, con);
+                    cmd.ExecuteNonQuery();
 
-                cmd = new MySqlCommand(updatePWD, con);
-                cmd.ExecuteNonQuery();
+                    cmd = new MySqlCommand(updatePWD, con);
+                    cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Todas as senhas de supervisores foram atualizadas para 1", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Todas as senhas de supervisores foram atualizadas para 1", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                finally
+                {
+                    con.Close();
+                }
 
 
-                con.Close();
             }
 
-            if (!cb_createDb.Checked && !cb_excluir.Checked && !cb_restauraBackup.Checked &&
-                !cb_atualizadb.Checked && !cb_pwd1.Checked && !cb_pwdsupervisor.Checked)
-            {
-                MessageBox.Show("Por favor, selecione alguma opção", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
             
+        }
+
+        private void encondeutf8()
+        {
+            string encoder = File.ReadAllText(nomeBackup);
+            
+            File.WriteAllText(nomeBackup, encoder, Encoding.UTF8);
         }
 
         private void text_nomeBackup_MouseLeave(object sender, EventArgs e)
@@ -590,6 +564,8 @@ namespace RestauradorBackupFORMS
             port = 3306;
             host = text_host.Text;
 
+            lbl_porta.Enabled = true;
+            text_porta.Enabled = true;
             lbl_Host.Enabled = true;
             text_host.Enabled = true;
 
@@ -603,6 +579,8 @@ namespace RestauradorBackupFORMS
 
             host = "10.1.1.220";
 
+            lbl_porta.Enabled = false;
+            text_porta.Enabled = false;
             lbl_Host.Enabled = false;
             text_host.Enabled = false;
         }
@@ -612,6 +590,26 @@ namespace RestauradorBackupFORMS
             host = text_host.Text;
 
             conectaDB();
+        }
+
+        private void text_porta_Leave(object sender, EventArgs e)
+        {
+            port = Convert.ToInt32(text_porta.Text);
+
+            conectaDB();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://forum.visualsoftware.inf.br/index.php");
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(label4.Text);
+            ToolTip tt = new ToolTip();
+            tt.Show("Copiado!", label4, 18, 20, 960);
+
         }
     }
 }

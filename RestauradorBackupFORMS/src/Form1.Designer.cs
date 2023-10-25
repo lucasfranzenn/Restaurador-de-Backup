@@ -37,6 +37,8 @@
             this.lbl_status = new System.Windows.Forms.Label();
             this.lbl_statusCon = new System.Windows.Forms.Label();
             this.gb_backup = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.cb_restauraBackup = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.cb_pwdsupervisor = new System.Windows.Forms.CheckBox();
@@ -58,6 +60,9 @@
             this.bttn_outro = new System.Windows.Forms.RadioButton();
             this.text_host = new System.Windows.Forms.TextBox();
             this.lbl_Host = new System.Windows.Forms.Label();
+            this.lbl_porta = new System.Windows.Forms.Label();
+            this.text_porta = new System.Windows.Forms.TextBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.box_porta.SuspendLayout();
             this.gb_backup.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -107,6 +112,8 @@
             // 
             // gb_backup
             // 
+            this.gb_backup.Controls.Add(this.label4);
+            this.gb_backup.Controls.Add(this.label3);
             this.gb_backup.Controls.Add(this.cb_restauraBackup);
             this.gb_backup.Controls.Add(this.button1);
             this.gb_backup.Controls.Add(this.cb_pwdsupervisor);
@@ -122,6 +129,19 @@
             resources.ApplyResources(this.gb_backup, "gb_backup");
             this.gb_backup.Name = "gb_backup";
             this.gb_backup.TabStop = false;
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label4.ForeColor = System.Drawing.Color.Blue;
+            this.label4.Name = "label4";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
             // 
             // cb_restauraBackup
             // 
@@ -268,6 +288,7 @@
             // text_host
             // 
             this.text_host.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.text_host.Cursor = System.Windows.Forms.Cursors.IBeam;
             resources.ApplyResources(this.text_host, "text_host");
             this.text_host.Name = "text_host";
             this.text_host.Leave += new System.EventHandler(this.text_host_Leave);
@@ -277,11 +298,33 @@
             resources.ApplyResources(this.lbl_Host, "lbl_Host");
             this.lbl_Host.Name = "lbl_Host";
             // 
+            // lbl_porta
+            // 
+            resources.ApplyResources(this.lbl_porta, "lbl_porta");
+            this.lbl_porta.Name = "lbl_porta";
+            // 
+            // text_porta
+            // 
+            this.text_porta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.text_porta, "text_porta");
+            this.text_porta.Name = "text_porta";
+            this.text_porta.Leave += new System.EventHandler(this.text_porta_Leave);
+            // 
+            // linkLabel1
+            // 
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // form
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.lbl_porta);
+            this.Controls.Add(this.text_porta);
             this.Controls.Add(this.lbl_Host);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lbl_credit);
@@ -290,6 +333,8 @@
             this.Controls.Add(this.lbl_statusCon);
             this.Controls.Add(this.lbl_status);
             this.Controls.Add(this.box_porta);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "form";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
@@ -334,6 +379,11 @@
         private System.Windows.Forms.RadioButton bttn_outro;
         private System.Windows.Forms.TextBox text_host;
         private System.Windows.Forms.Label lbl_Host;
+        private System.Windows.Forms.Label lbl_porta;
+        private System.Windows.Forms.TextBox text_porta;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
