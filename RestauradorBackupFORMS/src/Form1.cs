@@ -469,17 +469,23 @@ namespace RestauradorBackupFORMS
 
                 MySqlCommand cmd = new MySqlCommand(procuraBanco, con);
                 MySqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
+                try
                 {
-                    atualizaDB();
+                    if (reader.HasRows)
+                    {
+                        atualizaDB();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Banco não foi encontrado", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
                 }
-                else
+                finally
                 {
-                    MessageBox.Show("Banco não foi encontrado", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    con.Close();
                 }
 
-                con.Close();
             }
 
             if (cb_pwd1.Checked)
@@ -608,7 +614,7 @@ namespace RestauradorBackupFORMS
         {
             Clipboard.SetText(label4.Text);
             ToolTip tt = new ToolTip();
-            tt.Show("Copiado!", label4, 18, 20, 960);
+            tt.Show("Copiado para Área de Transferência", label4, -45, 20, 960);
 
         }
     }
