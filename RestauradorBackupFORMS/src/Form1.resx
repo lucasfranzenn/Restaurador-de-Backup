@@ -319,7 +319,7 @@
     <value>22</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>1035.3626.1874</value>
+    <value>1035.3926.1808</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -340,16 +340,16 @@
     <value>Microsoft Sans Serif, 10pt, style=Bold</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>486, 30</value>
+    <value>467, 34</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 17</value>
+    <value>226, 17</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Liberação Mensal (Outubro)</value>
+    <value>Liberação Mensal (Novembro)</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
