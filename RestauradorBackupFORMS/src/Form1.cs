@@ -83,7 +83,7 @@ namespace RestauradorBackupFORMS
                 MessageBox.Show(mensagem, "Banco não pode ser criado pois já existe!");
 
                 con.Close();
-                return false ;
+                return false;
 
             }
             else
@@ -198,8 +198,12 @@ namespace RestauradorBackupFORMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Arquivo não foi encontrado ou está com o caminho errado!", "OCORREU UM ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.ToString(), "OCORREU UM ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+            }
+            finally
+            {
+                linhas_lidas.Clear();
             }
         }
    
@@ -274,7 +278,7 @@ namespace RestauradorBackupFORMS
 
         private void restaurarBanco()
         {
-            string restore_backup = $"mysql -h {host} -u {user} -p{pwd} -P {port} {nomeBanco} < \"{nomeBackup}\"";
+            string restore_backup = $"mysql -h {host} -u {user} -p{pwd} -P {port} -f {nomeBanco} < \"{nomeBackup}\"";
 
             ProcessStartInfo psi = new ProcessStartInfo("cmd.exe")
             {
@@ -451,7 +455,7 @@ namespace RestauradorBackupFORMS
 
                 con.Close();
                 nomeBackup = text_nomeBackup.Text;
-                encondeutf8();
+                //encondeutf8();
                 restaurarBanco();
             }
 
