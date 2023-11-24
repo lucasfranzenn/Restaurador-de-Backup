@@ -257,6 +257,10 @@ namespace RestauradorBackupFORMS
 
                     lines[i] = $"IPServidor={host}";
                 }
+                else if (lines[i].StartsWith("Relatorios="))
+                {
+                    break;
+                }
             }
 
             File.WriteAllLines(configPath, lines);
@@ -644,6 +648,10 @@ namespace RestauradorBackupFORMS
                 else if (lines[i].StartsWith("IPServidor="))
                 {
                     host = lines[i].Split('=')[1];
+                }
+                else if (lines[i].StartsWith("Relatorios="))
+                {
+                    break;
                 }
             }
         }
