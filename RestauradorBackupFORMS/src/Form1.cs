@@ -44,7 +44,7 @@ namespace RestauradorBackupFORMS
             InitializeComponent();
         }
 
-        private bool showDatabase() 
+        private bool showDatabase()
         {
 
             if (text_nomeBanco.Text == "")
@@ -57,7 +57,7 @@ namespace RestauradorBackupFORMS
 
             con.Open();
             nomeBanco = text_nomeBanco.Text;
-            string procuraBanco= $"SHOW DATABASES LIKE '{nomeBanco}'";
+            string procuraBanco = $"SHOW DATABASES LIKE '{nomeBanco}'";
 
             MySqlCommand cmd = new MySqlCommand(procuraBanco, con);
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -92,7 +92,7 @@ namespace RestauradorBackupFORMS
                 con.Close();
                 return true;
             }
-            
+
         }
 
         private void conectaDB()
@@ -128,7 +128,7 @@ namespace RestauradorBackupFORMS
 
                 Con.Close();
 
-                
+
             }
         }
 
@@ -191,7 +191,7 @@ namespace RestauradorBackupFORMS
                     }
                 }
 
-                MessageBox.Show("Linhas CREATE e USE foram deletadas!","Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Linhas CREATE e USE foram deletadas!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
 
 
@@ -206,7 +206,7 @@ namespace RestauradorBackupFORMS
                 linhas_lidas.Clear();
             }
         }
-   
+
         private void createDatabase()
         {
             showDatabase();
@@ -272,7 +272,7 @@ namespace RestauradorBackupFORMS
             this.Show();
             this.WindowState = FormWindowState.Normal;
             this.StartPosition = FormStartPosition.CenterScreen;
-            
+
 
         }
 
@@ -315,7 +315,7 @@ namespace RestauradorBackupFORMS
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                text_nomeBackup.Text =dialog.FileName;
+                text_nomeBackup.Text = dialog.FileName;
             }
         }
 
@@ -332,7 +332,8 @@ namespace RestauradorBackupFORMS
             {
                 deleteCREATEUSE(nomeBackup);
 
-            } else if (Path.GetExtension(NomeBackup).Equals(".rar"))
+            }
+            else if (Path.GetExtension(NomeBackup).Equals(".rar"))
             {
                 openRar();
 
@@ -360,16 +361,16 @@ namespace RestauradorBackupFORMS
                                 Overwrite = true
                             });
 
-                            caminhoExtrair += "/" + entry.Key;    
+                            caminhoExtrair += "/" + entry.Key;
 
-                            text_nomeBackup.Text= caminhoExtrair;
+                            text_nomeBackup.Text = caminhoExtrair;
                             nomeBackup = caminhoExtrair;
 
                             return;
                         }
                     }
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString(), "ERRO!");
                 }
@@ -444,7 +445,7 @@ namespace RestauradorBackupFORMS
                 string procuraBanco = $"SHOW DATABASES LIKE '{nomeBanco}'";
                 MySqlCommand cmd = new MySqlCommand(procuraBanco, con);
                 MySqlDataReader reader = cmd.ExecuteReader();
-                
+
 
                 if (!reader.HasRows)
                 {
@@ -553,13 +554,13 @@ namespace RestauradorBackupFORMS
 
             }
 
-            
+
         }
 
         private void encondeutf8()
         {
             string encoder = File.ReadAllText(nomeBackup);
-            
+
             File.WriteAllText(nomeBackup, encoder, Encoding.UTF8);
         }
 
@@ -620,6 +621,31 @@ namespace RestauradorBackupFORMS
             ToolTip tt = new ToolTip();
             tt.Show("Copiado para Área de Transferência", label4, -45, 20, 960);
 
+        }
+
+        private void form_Load(object sender, EventArgs e)
+        {
+            string configPath = "C:\\Visual Software\\MyCommerce\\config.ini";
+
+            string[] lines = File.ReadAllLines(configPath);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].StartsWith("PortaServidor="))
+                {
+                    port = Convert.ToInt32(lines[i].Split('=')[1]);
+                    if (port == 3306) bttn_3306.Checked = true; else bttn_3307.Checked = true;
+                }
+                else if (lines[i].StartsWith("Database="))
+                {
+                    nomeBanco = lines[i].Split('=')[1];
+                    text_nomeBanco.Text = nomeBanco;
+                }
+                else if (lines[i].StartsWith("IPServidor="))
+                {
+                    host = lines[i].Split('=')[1];
+                }
+            }
         }
     }
 }

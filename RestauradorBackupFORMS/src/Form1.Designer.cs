@@ -338,6 +338,7 @@
             this.MaximizeBox = false;
             this.Name = "form";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
+            this.Load += new System.EventHandler(this.form_Load);
             this.box_porta.ResumeLayout(false);
             this.box_porta.PerformLayout();
             this.gb_backup.ResumeLayout(false);
