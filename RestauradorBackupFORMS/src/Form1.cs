@@ -15,7 +15,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
-using System.Windows.Forms;  
+using System.Windows.Forms;
+using ChangeConfig;
 
 namespace RestauradorBackupFORMS
 {
@@ -105,7 +106,7 @@ namespace RestauradorBackupFORMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Informe um IP válido!", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Houve falha na conexão!", ".:: ERRO ::.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -575,29 +576,47 @@ namespace RestauradorBackupFORMS
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            box_porta.Enabled = false;
-            port = 3306;
-            host = text_host.Text;
+            if (bttn_outro.Checked)
+            {
+                box_porta.Enabled = false;
+                port = Convert.ToInt32(text_porta.Text);
+                host = text_host.Text;
 
-            lbl_porta.Enabled = true;
-            text_porta.Enabled = true;
-            lbl_Host.Enabled = true;
-            text_host.Enabled = true;
+                lbl_porta.Enabled = true;
+                text_porta.Enabled = true;
+                lbl_Host.Enabled = true;
+                text_host.Enabled = true;
 
-            conectaDB();
+                if (bttn_3306.Checked == true)
+                {
+                    port = 3306;
+                    text_porta.Text = "3306";   
+
+                }
+                else if (bttn_3307.Checked == true)
+                {
+                    port = 3307;
+                    text_porta.Text = "3307";
+                }
+                    conectaDB();
+            }
 
         }
 
         private void bttn_220_CheckedChanged(object sender, EventArgs e)
         {
-            box_porta.Enabled = true;
+            if (bttn_220.Checked)
+            {
+                box_porta.Enabled = true;
 
-            host = "10.1.1.220";
+                host = "10.1.1.220";
 
-            lbl_porta.Enabled = false;
-            text_porta.Enabled = false;
-            lbl_Host.Enabled = false;
-            text_host.Enabled = false;
+                lbl_porta.Enabled = false;
+                text_porta.Enabled = false;
+                lbl_Host.Enabled = false;
+                text_host.Enabled = false;
+                conectaDB();
+            }
         }
 
         private void text_host_Leave(object sender, EventArgs e)
@@ -630,15 +649,15 @@ namespace RestauradorBackupFORMS
         private void form_Load(object sender, EventArgs e)
         {
             string configPath = "C:\\Visual Software\\MyCommerce\\config.ini";
-
             string[] lines = File.ReadAllLines(configPath);
+            bttn_3306.Checked = true;
 
             for (int i = 0; i < lines.Length; i++)
             {
                 if (lines[i].StartsWith("PortaServidor="))
                 {
                     port = Convert.ToInt32(lines[i].Split('=')[1]);
-                    if (port == 3306) bttn_3306.Checked = true; else bttn_3307.Checked = true;
+                    if (port == 3306) bttn_3306.Checked = true; else if (port == 3307) bttn_3307.Checked = true; else text_porta.Text = (lines[i].Split('=')[1]);
                 }
                 else if (lines[i].StartsWith("Database="))
                 {
@@ -648,12 +667,21 @@ namespace RestauradorBackupFORMS
                 else if (lines[i].StartsWith("IPServidor="))
                 {
                     host = lines[i].Split('=')[1];
+                    if (host == "10.1.1.220") bttn_220.Checked = true; else bttn_outro.Checked = true;
                 }
                 else if (lines[i].StartsWith("Relatorios="))
                 {
                     break;
                 }
             }
+
+            conectaDB();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form2 configForm = new Form2();
+            configForm.Show();
         }
     }
 }

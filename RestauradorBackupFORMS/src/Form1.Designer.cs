@@ -37,6 +37,7 @@
             this.lbl_status = new System.Windows.Forms.Label();
             this.lbl_statusCon = new System.Windows.Forms.Label();
             this.gb_backup = new System.Windows.Forms.GroupBox();
+            this.bttn_configini = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cb_restauraBackup = new System.Windows.Forms.CheckBox();
@@ -112,6 +113,7 @@
             // 
             // gb_backup
             // 
+            this.gb_backup.Controls.Add(this.bttn_configini);
             this.gb_backup.Controls.Add(this.label4);
             this.gb_backup.Controls.Add(this.label3);
             this.gb_backup.Controls.Add(this.cb_restauraBackup);
@@ -129,6 +131,15 @@
             resources.ApplyResources(this.gb_backup, "gb_backup");
             this.gb_backup.Name = "gb_backup";
             this.gb_backup.TabStop = false;
+            // 
+            // bttn_configini
+            // 
+            this.bttn_configini.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.bttn_configini.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.bttn_configini, "bttn_configini");
+            this.bttn_configini.Name = "bttn_configini";
+            this.bttn_configini.UseVisualStyleBackColor = true;
+            this.bttn_configini.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
             // 
@@ -270,10 +281,8 @@
             // bttn_220
             // 
             resources.ApplyResources(this.bttn_220, "bttn_220");
-            this.bttn_220.Checked = true;
             this.bttn_220.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bttn_220.Name = "bttn_220";
-            this.bttn_220.TabStop = true;
             this.bttn_220.UseVisualStyleBackColor = true;
             this.bttn_220.CheckedChanged += new System.EventHandler(this.bttn_220_CheckedChanged);
             // 
@@ -385,6 +394,7 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button bttn_configini;
     }
 }
 
