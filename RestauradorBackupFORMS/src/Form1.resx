@@ -339,11 +339,41 @@
   <data name="&gt;&gt;lbl_statusCon.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="bttn_reloadconfig.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="bttn_reloadconfig.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="bttn_reloadconfig.Location" type="System.Drawing.Point, System.Drawing">
+    <value>189, 46</value>
+  </data>
+  <data name="bttn_reloadconfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 19</value>
+  </data>
+  <data name="bttn_reloadconfig.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;bttn_reloadconfig.Name" xml:space="preserve">
+    <value>bttn_reloadconfig</value>
+  </data>
+  <data name="&gt;&gt;bttn_reloadconfig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bttn_reloadconfig.Parent" xml:space="preserve">
+    <value>gb_backup</value>
+  </data>
+  <data name="&gt;&gt;bttn_reloadconfig.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="bttn_configini.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
   <data name="bttn_configini.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="bttn_configini.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="bttn_configini.Location" type="System.Drawing.Point, System.Drawing">
     <value>501, 384</value>
@@ -367,7 +397,7 @@
     <value>gb_backup</value>
   </data>
   <data name="&gt;&gt;bttn_configini.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -397,7 +427,7 @@
     <value>gb_backup</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -427,7 +457,7 @@
     <value>gb_backup</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="cb_restauraBackup.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -439,7 +469,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_restauraBackup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 266</value>
+    <value>13, 282</value>
   </data>
   <data name="cb_restauraBackup.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 17</value>
@@ -460,7 +490,7 @@
     <value>gb_backup</value>
   </data>
   <data name="&gt;&gt;cb_restauraBackup.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="button1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -496,39 +526,6 @@
     <value>gb_backup</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="cb_pwdsupervisor.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cb_pwdsupervisor.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="cb_pwdsupervisor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cb_pwdsupervisor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 335</value>
-  </data>
-  <data name="cb_pwdsupervisor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 17</value>
-  </data>
-  <data name="cb_pwdsupervisor.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="cb_pwdsupervisor.Text" xml:space="preserve">
-    <value>Senha Supervisor = 1</value>
-  </data>
-  <data name="&gt;&gt;cb_pwdsupervisor.Name" xml:space="preserve">
-    <value>cb_pwdsupervisor</value>
-  </data>
-  <data name="&gt;&gt;cb_pwdsupervisor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_pwdsupervisor.Parent" xml:space="preserve">
-    <value>gb_backup</value>
-  </data>
-  <data name="&gt;&gt;cb_pwdsupervisor.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="cb_excluir.AutoSize" type="System.Boolean, mscorlib">
@@ -541,7 +538,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_excluir.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 243</value>
+    <value>13, 259</value>
   </data>
   <data name="cb_excluir.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 17</value>
@@ -574,7 +571,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_atualizadb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 289</value>
+    <value>13, 305</value>
   </data>
   <data name="cb_atualizadb.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 17</value>
@@ -597,37 +594,37 @@
   <data name="&gt;&gt;cb_atualizadb.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="cb_pwd1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="cb_updates.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cb_pwd1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cb_updates.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="cb_pwd1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cb_updates.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cb_pwd1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 312</value>
+  <data name="cb_updates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 328</value>
   </data>
-  <data name="cb_pwd1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 17</value>
+  <data name="cb_updates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 17</value>
   </data>
-  <data name="cb_pwd1.TabIndex" type="System.Int32, mscorlib">
+  <data name="cb_updates.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="cb_pwd1.Text" xml:space="preserve">
-    <value>Senha = 1</value>
+  <data name="cb_updates.Text" xml:space="preserve">
+    <value>Realizar Updates para teste</value>
   </data>
-  <data name="&gt;&gt;cb_pwd1.Name" xml:space="preserve">
-    <value>cb_pwd1</value>
+  <data name="&gt;&gt;cb_updates.Name" xml:space="preserve">
+    <value>cb_updates</value>
   </data>
-  <data name="&gt;&gt;cb_pwd1.Type" xml:space="preserve">
+  <data name="&gt;&gt;cb_updates.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cb_pwd1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cb_updates.Parent" xml:space="preserve">
     <value>gb_backup</value>
   </data>
-  <data name="&gt;&gt;cb_pwd1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cb_updates.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="cb_createDb.AutoSize" type="System.Boolean, mscorlib">
@@ -640,7 +637,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_createDb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 220</value>
+    <value>13, 236</value>
   </data>
   <data name="cb_createDb.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 17</value>

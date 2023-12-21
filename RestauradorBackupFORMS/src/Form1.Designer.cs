@@ -37,15 +37,15 @@
             this.lbl_status = new System.Windows.Forms.Label();
             this.lbl_statusCon = new System.Windows.Forms.Label();
             this.gb_backup = new System.Windows.Forms.GroupBox();
+            this.bttn_reloadconfig = new System.Windows.Forms.Button();
             this.bttn_configini = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cb_restauraBackup = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.cb_pwdsupervisor = new System.Windows.Forms.CheckBox();
             this.cb_excluir = new System.Windows.Forms.CheckBox();
             this.cb_atualizadb = new System.Windows.Forms.CheckBox();
-            this.cb_pwd1 = new System.Windows.Forms.CheckBox();
+            this.cb_updates = new System.Windows.Forms.CheckBox();
             this.cb_createDb = new System.Windows.Forms.CheckBox();
             this.bttn_fileSearch = new System.Windows.Forms.Button();
             this.text_nomeBackup = new System.Windows.Forms.TextBox();
@@ -113,15 +113,15 @@
             // 
             // gb_backup
             // 
+            this.gb_backup.Controls.Add(this.bttn_reloadconfig);
             this.gb_backup.Controls.Add(this.bttn_configini);
             this.gb_backup.Controls.Add(this.label4);
             this.gb_backup.Controls.Add(this.label3);
             this.gb_backup.Controls.Add(this.cb_restauraBackup);
             this.gb_backup.Controls.Add(this.button1);
-            this.gb_backup.Controls.Add(this.cb_pwdsupervisor);
             this.gb_backup.Controls.Add(this.cb_excluir);
             this.gb_backup.Controls.Add(this.cb_atualizadb);
-            this.gb_backup.Controls.Add(this.cb_pwd1);
+            this.gb_backup.Controls.Add(this.cb_updates);
             this.gb_backup.Controls.Add(this.cb_createDb);
             this.gb_backup.Controls.Add(this.bttn_fileSearch);
             this.gb_backup.Controls.Add(this.text_nomeBackup);
@@ -131,6 +131,14 @@
             resources.ApplyResources(this.gb_backup, "gb_backup");
             this.gb_backup.Name = "gb_backup";
             this.gb_backup.TabStop = false;
+            // 
+            // bttn_reloadconfig
+            // 
+            resources.ApplyResources(this.bttn_reloadconfig, "bttn_reloadconfig");
+            this.bttn_reloadconfig.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bttn_reloadconfig.Name = "bttn_reloadconfig";
+            this.bttn_reloadconfig.UseVisualStyleBackColor = true;
+            this.bttn_reloadconfig.Click += new System.EventHandler(this.bttn_reloadconfig_Click);
             // 
             // bttn_configini
             // 
@@ -157,8 +165,6 @@
             // cb_restauraBackup
             // 
             resources.ApplyResources(this.cb_restauraBackup, "cb_restauraBackup");
-            this.cb_restauraBackup.Checked = true;
-            this.cb_restauraBackup.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_restauraBackup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cb_restauraBackup.Name = "cb_restauraBackup";
             this.cb_restauraBackup.UseVisualStyleBackColor = true;
@@ -171,20 +177,9 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // cb_pwdsupervisor
-            // 
-            resources.ApplyResources(this.cb_pwdsupervisor, "cb_pwdsupervisor");
-            this.cb_pwdsupervisor.Checked = true;
-            this.cb_pwdsupervisor.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_pwdsupervisor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cb_pwdsupervisor.Name = "cb_pwdsupervisor";
-            this.cb_pwdsupervisor.UseVisualStyleBackColor = true;
-            // 
             // cb_excluir
             // 
             resources.ApplyResources(this.cb_excluir, "cb_excluir");
-            this.cb_excluir.Checked = true;
-            this.cb_excluir.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_excluir.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cb_excluir.Name = "cb_excluir";
             this.cb_excluir.UseVisualStyleBackColor = true;
@@ -192,26 +187,20 @@
             // cb_atualizadb
             // 
             resources.ApplyResources(this.cb_atualizadb, "cb_atualizadb");
-            this.cb_atualizadb.Checked = true;
-            this.cb_atualizadb.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_atualizadb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cb_atualizadb.Name = "cb_atualizadb";
             this.cb_atualizadb.UseVisualStyleBackColor = true;
             // 
-            // cb_pwd1
+            // cb_updates
             // 
-            resources.ApplyResources(this.cb_pwd1, "cb_pwd1");
-            this.cb_pwd1.Checked = true;
-            this.cb_pwd1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_pwd1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cb_pwd1.Name = "cb_pwd1";
-            this.cb_pwd1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.cb_updates, "cb_updates");
+            this.cb_updates.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cb_updates.Name = "cb_updates";
+            this.cb_updates.UseVisualStyleBackColor = true;
             // 
             // cb_createDb
             // 
             resources.ApplyResources(this.cb_createDb, "cb_createDb");
-            this.cb_createDb.Checked = true;
-            this.cb_createDb.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_createDb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cb_createDb.Name = "cb_createDb";
             this.cb_createDb.UseVisualStyleBackColor = true;
@@ -370,18 +359,8 @@
         private System.Windows.Forms.GroupBox gb_backup;
         private System.Windows.Forms.Label lbl_nomeBanco;
         private System.Windows.Forms.TextBox text_nomeBanco;
-        private System.Windows.Forms.TextBox text_nomeBackup;
-        private System.Windows.Forms.Label lbl_nomeBackup;
-        private System.Windows.Forms.Button bttn_fileSearch;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label lbl_credit;
-        private System.Windows.Forms.CheckBox cb_pwd1;
-        private System.Windows.Forms.CheckBox cb_createDb;
-        private System.Windows.Forms.CheckBox cb_pwdsupervisor;
-        private System.Windows.Forms.CheckBox cb_excluir;
-        private System.Windows.Forms.CheckBox cb_atualizadb;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox cb_restauraBackup;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lbl_IP;
@@ -394,7 +373,17 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button bttn_reloadconfig;
         private System.Windows.Forms.Button bttn_configini;
+        private System.Windows.Forms.CheckBox cb_restauraBackup;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox cb_excluir;
+        private System.Windows.Forms.CheckBox cb_atualizadb;
+        private System.Windows.Forms.CheckBox cb_updates;
+        private System.Windows.Forms.CheckBox cb_createDb;
+        private System.Windows.Forms.Button bttn_fileSearch;
+        private System.Windows.Forms.TextBox text_nomeBackup;
+        private System.Windows.Forms.Label lbl_nomeBackup;
     }
 }
 

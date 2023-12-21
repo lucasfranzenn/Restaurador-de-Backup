@@ -13,6 +13,7 @@ using System.Linq;
 using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
@@ -272,6 +273,11 @@ namespace RestauradorBackupFORMS
             process.StartInfo.FileName = atualizaPath;
 
             process.Start();
+
+            Thread.Sleep(250);
+            SendKeys.Send("{TAB}");
+            SendKeys.Send("{ENTER}");
+
             process.WaitForExit();
 
             this.Show();
@@ -390,7 +396,7 @@ namespace RestauradorBackupFORMS
         private void button1_Click_1(object sender, EventArgs e)
         {
             if (!cb_createDb.Checked && !cb_excluir.Checked && !cb_restauraBackup.Checked &&
-                !cb_atualizadb.Checked && !cb_pwd1.Checked && !cb_pwdsupervisor.Checked)
+                !cb_atualizadb.Checked && !cb_updates.Checked)
             {
                 MessageBox.Show("Por favor, selecione alguma opção", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -498,7 +504,7 @@ namespace RestauradorBackupFORMS
 
             }
 
-            if (cb_pwd1.Checked)
+            if (cb_updates.Checked)
             {
                 if (text_nomeBanco.Text == "")
                 {
@@ -508,17 +514,31 @@ namespace RestauradorBackupFORMS
 
                 con.Open();
                 string useBanco = $"use `{nomeBanco}`";
-                string updatePWD = $"UPDATE usuarios SET PASSWORD = 'W'";
+                string[] updates = {
+                    "UPDATE usuarios SET PASSWORD = 'W'",
+                    "UPDATE usuarios_supervisores SET Password = '4'"};
 
                 try
                 {
                     MySqlCommand cmd = new MySqlCommand(useBanco, con);
                     cmd.ExecuteNonQuery();
 
-                    cmd = new MySqlCommand(updatePWD, con);
-                    cmd.ExecuteNonQuery();
+                    for(int i=0; i< updates.Length; i++)
+                    {
+                        cmd = new MySqlCommand(updates[i], con);
+                        cmd.ExecuteNonQuery();
+                    }
 
-                    MessageBox.Show("Todas as senhas foram atualizadas para 1", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    MessageBox.Show("Updates realizados com sucesso:\n\n" +
+                        " -Senha=1;\n" +
+                        " -SenhaSupervisor=1;\n" +
+                        " -Telefone=9999999999;\n" +
+                        "", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    SendKeys.Send("{ESC}");
+                    Thread.Sleep(250);
+
                 }
                 finally
                 {
@@ -529,7 +549,7 @@ namespace RestauradorBackupFORMS
 
             }
 
-            if (cb_pwdsupervisor.Checked)
+            /*if (cb_pwdsupervisor.Checked)
             {
                 if (text_nomeBanco.Text == "")
                 {
@@ -557,7 +577,7 @@ namespace RestauradorBackupFORMS
                 }
 
 
-            }
+            }*/
 
 
         }
@@ -646,7 +666,7 @@ namespace RestauradorBackupFORMS
 
         }
 
-        private void form_Load(object sender, EventArgs e)
+        private void cmd_atualiza()
         {
             string configPath = "C:\\Visual Software\\MyCommerce\\config.ini";
             string[] lines = File.ReadAllLines(configPath);
@@ -662,7 +682,7 @@ namespace RestauradorBackupFORMS
                 else if (lines[i].StartsWith("Database="))
                 {
                     nomeBanco = lines[i].Split('=')[1];
-                    text_nomeBanco.Text = nomeBanco;
+                    text_nomeBanco.Text = nomeBanco.Trim();
                 }
                 else if (lines[i].StartsWith("IPServidor="))
                 {
@@ -678,10 +698,22 @@ namespace RestauradorBackupFORMS
             conectaDB();
         }
 
+        private void form_Load(object sender, EventArgs e)
+        {
+            cmd_atualiza();
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             Form2 configForm = new Form2();
             configForm.Show();
+        }
+
+        private void bttn_reloadconfig_Click(object sender, EventArgs e)
+        {
+           cmd_atualiza();
+           ToolTip tt = new ToolTip();
+           tt.Show("Configurações de banco sincronizadas!", bttn_reloadconfig, 20, 0, 960);
         }
     }
 }
