@@ -39,8 +39,6 @@
             this.gb_backup = new System.Windows.Forms.GroupBox();
             this.bttn_reloadconfig = new System.Windows.Forms.Button();
             this.bttn_configini = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.cb_restauraBackup = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.cb_excluir = new System.Windows.Forms.CheckBox();
@@ -115,8 +113,6 @@
             // 
             this.gb_backup.Controls.Add(this.bttn_reloadconfig);
             this.gb_backup.Controls.Add(this.bttn_configini);
-            this.gb_backup.Controls.Add(this.label4);
-            this.gb_backup.Controls.Add(this.label3);
             this.gb_backup.Controls.Add(this.cb_restauraBackup);
             this.gb_backup.Controls.Add(this.button1);
             this.gb_backup.Controls.Add(this.cb_excluir);
@@ -148,19 +144,6 @@
             this.bttn_configini.Name = "bttn_configini";
             this.bttn_configini.UseVisualStyleBackColor = true;
             this.bttn_configini.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label4.ForeColor = System.Drawing.Color.Blue;
-            this.label4.Name = "label4";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
             // 
             // cb_restauraBackup
             // 
@@ -371,8 +354,6 @@
         private System.Windows.Forms.Label lbl_porta;
         private System.Windows.Forms.TextBox text_porta;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button bttn_reloadconfig;
         private System.Windows.Forms.Button bttn_configini;
         private System.Windows.Forms.CheckBox cb_restauraBackup;

@@ -536,9 +536,6 @@ namespace RestauradorBackupFORMS
                         " -Telefone=9999999999;\n" +
                         "", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    SendKeys.Send("{ESC}");
-                    Thread.Sleep(250);
-
                 }
                 finally
                 {
@@ -658,14 +655,6 @@ namespace RestauradorBackupFORMS
             System.Diagnostics.Process.Start("https://forum.visualsoftware.inf.br/index.php");
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(label4.Text);
-            ToolTip tt = new ToolTip();
-            tt.Show("Copiado para Área de Transferência", label4, -45, 20, 960);
-
-        }
-
         private void cmd_atualiza()
         {
             string configPath = "C:\\Visual Software\\MyCommerce\\config.ini";
@@ -707,6 +696,10 @@ namespace RestauradorBackupFORMS
         {
             Form2 configForm = new Form2();
             configForm.Show();
+
+            this.Hide();
+
+            configForm.FormClosed += (s, args) => this.Show();
         }
 
         private void bttn_reloadconfig_Click(object sender, EventArgs e)
