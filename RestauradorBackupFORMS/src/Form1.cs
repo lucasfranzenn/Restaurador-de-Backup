@@ -627,6 +627,7 @@ namespace RestauradorBackupFORMS
                 box_porta.Enabled = true;
 
                 host = "10.1.1.220";
+                port = (bttn_3306.Checked) ? 3306 : 3307;
 
                 lbl_porta.Enabled = false;
                 text_porta.Enabled = false;
